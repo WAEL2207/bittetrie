@@ -17,6 +17,36 @@ return [
         'guard' => 'web',
         'passwords' => 'users',
     ],
+    'guards' => [
+        'client' => [
+            'driver' => 'sanctum',
+            'provider' => 'clients',
+        ],
+        'admin' => [
+            'driver' => 'sanctum',
+            'provider' => 'administrateurs',
+        ],
+        'organisateur' => [
+            'driver' => 'sanctum',
+            'provider' => 'organisateurs',
+        ],
+    ],
+
+    'providers' => [
+        'clients' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\Client::class,
+        ],
+        'administrateurs' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\Administrateur::class,
+        ],
+        'organisateurs' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\OrganisateurEvenement::class,
+        ],
+    ],
+
 
     /*
     |--------------------------------------------------------------------------

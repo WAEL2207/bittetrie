@@ -1,19 +1,37 @@
 <?php
 
-use Illuminate\Http\Request;
+use App\Http\Controllers\Api\Auth\AdministrateurAuthController;
+use App\Http\Controllers\Api\Auth\OrganisateurAuthController;
+use App\Http\Controllers\Api\Auth\ClientAuthController;
 use Illuminate\Support\Facades\Route;
 
-/*
-|--------------------------------------------------------------------------
-| API Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register API routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "api" middleware group. Make something great!
-|
-*/
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+// Routes pour authentication client
+Route::prefix('client')->name('client.')->group(function () {
+    Route::post('login', [ClientAuthController::class, 'login']);
+    Route::get('login', [ClientAuthController::class, 'login']);
+
+    Route::post('logout', [ClientAuthController::class, 'logout']);
+    Route::get('logout', [ClientAuthController::class, 'logout']);
+
+});
+
+// Routes pour authentication organisateur
+Route::prefix('organisateur')->name('organisateur.')->group(function () {
+    Route::post('login', [OrganisateurAuthController::class, 'login']);
+    Route::get('login', [OrganisateurAuthController::class, 'login']);
+
+    Route::post('logout', [OrganisateurAuthController::class, 'logout']);
+    Route::get('logout', [OrganisateurAuthController::class, 'logout']);
+
+});
+
+// Routes pour l'authentification administrateur
+Route::prefix('administrateur')->name('administrateur.')->group(function () {
+    Route::post('login', [AdministrateurAuthController::class, 'login']);
+    Route::get('login', [AdministrateurAuthController::class, 'login']);
+
+    Route::post('logout', [AdministrateurAuthController::class, 'logout']);
+    Route::get('logout', [AdministrateurAuthController::class, 'logout']);
+
 });
